@@ -1,0 +1,75 @@
+name: Portal Agent — Weekly Health Check
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 14 * * 1"  # Mondays 14:00 UTC (adjust later)
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  healthcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check URLs + required PDFs
+        id: check
+        run: |
+          set -e
+
+          BASE="https://ttony106-source.github.io/kamakazi-partner-portal"
+
+          echo "Checking portal pages..."
+          for path in bank foundation government transparency; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" "$BASE/$path/")
+            echo "$path page: $code"
+          done
+
+          echo ""
+          echo "Checking required PDFs..."
+          required=(
+            "bank/CRA_Package_v1.pdf"
+            "bank/Renewal_Deck_v1.pdf"
+            "foundation/Foundation_Pack_v1.pdf"
+            "foundation/Use_of_Funds_v1.pdf"
+            "government/PRM_Brief_v1.pdf"
+            "government/City_County_Pack_v1.pdf"
+          )
+
+          missing=""
+          for f in "${required[@]}"; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" "$BASE/$f")
+            echo "$f : $code"
+            if [ "$code" != "200" ]; then
+              missing="$missing\n- $f (HTTP $code)"
+            fi
+          done
+
+          if [ -z "$missing" ]; then
+            status="✅ ALL OK"
+            body="All portals and required PDFs returned HTTP 200."
+          else
+            status="⚠️ ACTION NEEDED"
+            body="The following required files/pages failed:\n$missing"
+          fi
+
+          echo "status=$status" >> $GITHUB_OUTPUT
+          echo "body<<EOF" >> $GITHUB_OUTPUT
+          echo -e "$body" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create Issue report
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const status = `${{ steps.check.outputs.status }}`;
+            const body = `${{ steps.check.outputs.body }}`;
+
+            const today = new Date().toISOString().slice(0,10);
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Portal Agent Report — ${today} — ${status}`,
+              body
+            });
