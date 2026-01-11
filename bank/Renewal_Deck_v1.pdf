@@ -1,1 +1,103 @@
+%PDF-1.4
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
 
+2 0 obj
+<<
+/Type /Pages
+/Kids [3 0 R]
+/Count 1
+>>
+endobj
+
+3 0 obj
+<<
+/Type /Page
+/Parent 2 0 R
+/Resources <<
+/Font <<
+/F1 <<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+/F2 <<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica-Bold
+>>
+>>
+>>
+/MediaBox [0 0 612 792]
+/Contents 4 0 R
+>>
+endobj
+
+4 0 obj
+<<
+/Length 850
+>>
+stream
+BT
+/F2 24 Tf
+50 720 Td
+(Kamakazi Capital) Tj
+0 -30 Td
+(Bank CRA Renewal Dashboard) Tj
+/F1 12 Tf
+0 -40 Td
+(Version 2026-Q1) Tj
+0 -30 Td
+(This document provides banks with comprehensive CRA renewal metrics,) Tj
+0 -20 Td
+(performance indicators, and compliance dashboards for the current quarter.) Tj
+0 -40 Td
+/F2 14 Tf
+(Key Performance Indicators:) Tj
+/F1 12 Tf
+0 -30 Td
+(- CRA Qualification Status: Active) Tj
+0 -20 Td
+(- Community Investment Rating: Strong) Tj
+0 -20 Td
+(- Outcome Scoring: Real-time tracking enabled) Tj
+0 -20 Td
+(- Cost Efficiency: Optimized per-participant metrics) Tj
+0 -40 Td
+/F2 14 Tf
+(Renewal Resources:) Tj
+/F1 12 Tf
+0 -30 Td
+(- Live outcome scores by program) Tj
+0 -20 Td
+(- Risk flags and remediation plans) Tj
+0 -20 Td
+(- Quarterly compliance views) Tj
+0 -60 Td
+/F1 10 Tf
+(For detailed information and real-time dashboards, visit the) Tj
+0 -15 Td
+(Bank CRA Portal at kamakazi-partner-portal/bank) Tj
+ET
+endstream
+endobj
+
+xref
+0 5
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000366 00000 n 
+trailer
+<<
+/Size 5
+/Root 1 0 R
+>>
+startxref
+1267
+%%EOF
